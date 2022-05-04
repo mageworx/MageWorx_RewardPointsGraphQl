@@ -1,0 +1,66 @@
+# Copyright © MageWorx, Inc. All rights reserved.
+# See COPYING.txt for license details.
+type Customer {
+    mw_reward_points: MwRewardPoints @doc(description: "Customer reward points details") @resolver (class: "\\MageWorx\\RewardPointsGraphQl\\Model\\Resolver\\Customer\\RewardPoints")
+}
+
+type Mutation {
+    applyMwRewardPointsToCart(input: ApplyMwRewardPointsToCartInput): ApplyMwRewardPointsToCartOutput @doc(description: "Add Reward Points to Cart") @resolver(class: "\\MageWorx\\RewardPointsGraphQl\\Model\\Resolver\\ApplyRewardPointsToCart")
+    removeMwRewardPointsFromCart(input: RemoveMwRewardPointsToCartInput): RemoveMwRewardPointsFromCartOutput @doc(description: "Remove Reward Points from Cart") @resolver(class: "\\MageWorx\\RewardPointsGraphQl\\Model\\Resolver\\RemoveRewardPointsFromCart")
+}
+
+type Cart {
+    mw_applied_reward_points: MwRewardPointsBalance @doc(description: "Applied reward points details") @resolver (class: "\\MageWorx\\RewardPointsGraphQl\\Model\\Resolver\\Cart\\AppliedRewardPoints")
+    mw_reward_messages: CartRewardMessages @doc(description: "Cart Reward Messages") @resolver(class: "MageWorx\\RewardPointsGraphQl\\Model\\Resolver\\CartRewardMessages")
+}
+
+interface ProductInterface {
+    mw_reward_messages: ProductRewardMessages @doc(description: "Product Reward Messages") @resolver(class: "MageWorx\\RewardPointsGraphQl\\Model\\Resolver\\ProductRewardMessages")
+}
+
+type MwRewardPoints {
+    balance: MwRewardPointsBalance @doc(description: "Current balance")
+    expiration_date: String! @doc(description: "Expiration Date")
+    transactions: [MwRewardPointsTransaction] @doc(description: "An array of applied Gift Cards Reward Points Transactions")
+}
+
+type MwRewardPointsBalance {
+    points: Float! @doc(description: "Points value")
+    money: Money! @doc(description: "The amount of reward points in the currency of the store")
+}
+
+type MwRewardPointsTransaction {
+    balance: Float! @doc(description: "Points Balance")
+    delta: String! @doc(description: "Points Delta")
+    message: String! @doc(description: "Message")
+    date: String! @doc(description: "Date")
+}
+
+input ApplyMwRewardPointsToCartInput {
+    cart_id: String! @doc(description:"The unique ID that identifies the customer's cart")
+    points: Float @doc(description: "Points value")
+}
+
+input RemoveMwRewardPointsToCartInput {
+    cart_id: String! @doc(description:"The unique ID that identifies the customer's cart")
+}
+
+type ApplyMwRewardPointsToCartOutput {
+    cart: Cart! @doc(description: "Describes the contents of the specified shopping cart")
+}
+
+type RemoveMwRewardPointsFromCartOutput {
+    cart: Cart! @doc(description: "Describes the contents of the specified shopping cart")
+}
+
+type CartRewardMessages {
+    header_message: String! @doc(description: "Header Reward Message")
+    minicart_message: String! @doc(description: "Mini-cart Reward Message")
+    cart_message: String! @doc(description: "Cart Reward Message")
+    checkout_message: String! @doc(description: "Checkout Reward Message")
+}
+
+type ProductRewardMessages {
+    product_message: String! @doc(description: "Product Reward Message")
+    category_message: String! @doc(description: "Category Reward Message")
+}
