@@ -2,7 +2,7 @@
     "name": "mageworx/module-rewardpoints-graphql",
     "description": "MageWorx Reward Points GraphQl",
     "require": {
-        "mageworx/module-rewardpoints": ">= 1.8.8"
+        "mageworx/module-rewardpoints": ">= 1.8.11"
     },
     "type": "magento2-module",
     "version": "1.0.0",
