@@ -142,9 +142,9 @@ class RewardPoints implements ResolverInterface
      */
     protected function getExpirationDate(CustomerBalanceInterface $customerBalance): ?string
     {
-        if ($customerBalance->getExpirationDate() && $this->helperData->isEnableExpirationDate(
-                $customerBalance->getWebsiteId()
-            )) {
+        if ($customerBalance->getExpirationDate()
+            && $this->helperData->isEnableExpirationDate($customerBalance->getWebsiteId())
+        ) {
             return $this->timezone->formatDate(new \DateTime($customerBalance->getExpirationDate()));
         }
 

@@ -20,13 +20,13 @@ interface ProductInterface {
 
 type MwRewardPoints {
     balance: MwRewardPointsBalance @doc(description: "Current balance")
-    expiration_date: String! @doc(description: "Expiration Date")
+    expiration_date: String @doc(description: "Expiration Date")
     transactions: [MwRewardPointsTransaction] @doc(description: "An array of applied Gift Cards Reward Points Transactions")
 }
 
 type MwRewardPointsBalance {
-    points: Float! @doc(description: "Points value")
-    money: Money! @doc(description: "The amount of reward points in the currency of the store")
+    points: Float @doc(description: "Points value")
+    money: Money @doc(description: "The amount of reward points in the currency of the store")
 }
 
 type MwRewardPointsTransaction {
