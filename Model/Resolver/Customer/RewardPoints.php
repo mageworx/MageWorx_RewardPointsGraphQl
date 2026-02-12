@@ -100,7 +100,7 @@ class RewardPoints implements ResolverInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function resolve(Field $field, $context, ResolveInfo $info, array $value = null, array $args = null)
+    public function resolve(Field $field, $context, ResolveInfo $info, ?array $value = null, ?array $args = null)
     {
         /** @var Customer $customer */
         $customer = $this->customerRegistry->retrieve($context->getUserId());
